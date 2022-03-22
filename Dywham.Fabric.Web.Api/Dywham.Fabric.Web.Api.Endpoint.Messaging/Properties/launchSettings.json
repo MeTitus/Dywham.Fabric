@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Dywham.Commons.Web.Api.Endpoint.Messaging": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55063;http://localhost:55064"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Authors>Dywham Systems</Authors>
+		<Company>Dywham Systems</Company>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Product>Dywham Fabric</Product>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<FileVersion>1.0.2.0</FileVersion>
+		<Copyright>Copyright © 2017-2022 Dywham Systems, All Rights Reserved</Copyright>
+		<PackageLicenseFile>eula.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\eula.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Properties\launchSettings.json" />
+  </ItemGroup>
+
+	<ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="Dywham.Fabric.Microservices.Contracts" Version="1.0.2" />
+    <PackageReference Include="Dywham.Fabric.Providers.Serialization.Json" Version="1.0.1" />
+    <PackageReference Include="NServiceBus" Version="7.7.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dywham.Fabric.Web.Api.Endpoint\Dywham.Fabric.Web.Api.Endpoint.csproj" />
+	</ItemGroup>
+
+</Project>

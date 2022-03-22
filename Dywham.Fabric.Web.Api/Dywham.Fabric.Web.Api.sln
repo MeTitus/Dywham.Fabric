@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extended", "Extended", "{3EC6720C-DD8B-40DE-9541-F9A2523C05D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Client", "Dywham.Fabric.Web.Api.Client\Dywham.Fabric.Web.Api.Client.csproj", "{0EDA66A6-A002-4653-8F8B-37B7D88FB10B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Contracts", "Dywham.Fabric.Web.Api.Contracts\Dywham.Fabric.Web.Api.Contracts.csproj", "{BC467378-0395-42A3-923B-1D8375B2C102}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Endpoint", "Dywham.Fabric.Web.Api.Endpoint\Dywham.Fabric.Web.Api.Endpoint.csproj", "{61F66F2D-9CF3-4C50-9810-99615B834016}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Endpoint.Messaging", "Dywham.Fabric.Web.Api.Endpoint.Messaging\Dywham.Fabric.Web.Api.Endpoint.Messaging.csproj", "{04811096-FDC9-4FE7-B711-4401F1C556E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Extended.Contracts", "Dywham.Fabric.Web.Api.Extended.Contracts\Dywham.Fabric.Web.Api.Extended.Contracts.csproj", "{9A975EEB-6723-4221-98A0-032AC16D7D28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Web.Api.Extended.Endpoint", "Dywham.Fabric.Web.Api.Extended.Endpoint\Dywham.Fabric.Web.Api.Extended.Endpoint.csproj", "{54694CEB-F12D-4922-BE99-DD8F7693AD43}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EDA66A6-A002-4653-8F8B-37B7D88FB10B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDA66A6-A002-4653-8F8B-37B7D88FB10B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EDA66A6-A002-4653-8F8B-37B7D88FB10B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EDA66A6-A002-4653-8F8B-37B7D88FB10B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC467378-0395-42A3-923B-1D8375B2C102}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC467378-0395-42A3-923B-1D8375B2C102}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC467378-0395-42A3-923B-1D8375B2C102}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC467378-0395-42A3-923B-1D8375B2C102}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61F66F2D-9CF3-4C50-9810-99615B834016}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61F66F2D-9CF3-4C50-9810-99615B834016}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61F66F2D-9CF3-4C50-9810-99615B834016}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61F66F2D-9CF3-4C50-9810-99615B834016}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04811096-FDC9-4FE7-B711-4401F1C556E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04811096-FDC9-4FE7-B711-4401F1C556E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04811096-FDC9-4FE7-B711-4401F1C556E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04811096-FDC9-4FE7-B711-4401F1C556E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A975EEB-6723-4221-98A0-032AC16D7D28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A975EEB-6723-4221-98A0-032AC16D7D28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A975EEB-6723-4221-98A0-032AC16D7D28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A975EEB-6723-4221-98A0-032AC16D7D28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54694CEB-F12D-4922-BE99-DD8F7693AD43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54694CEB-F12D-4922-BE99-DD8F7693AD43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54694CEB-F12D-4922-BE99-DD8F7693AD43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54694CEB-F12D-4922-BE99-DD8F7693AD43}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9A975EEB-6723-4221-98A0-032AC16D7D28} = {3EC6720C-DD8B-40DE-9541-F9A2523C05D6}
+		{54694CEB-F12D-4922-BE99-DD8F7693AD43} = {3EC6720C-DD8B-40DE-9541-F9A2523C05D6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5382EB5C-6053-4FC0-BBF8-B4BA67D6397C}
+	EndGlobalSection
+EndGlobal

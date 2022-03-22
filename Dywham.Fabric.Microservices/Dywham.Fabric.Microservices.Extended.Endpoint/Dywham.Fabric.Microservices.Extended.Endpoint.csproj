@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Authors>Dywham Systems</Authors>
+		<Company>Dywham Systems</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Product>Dywham Fabric</Product>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<FileVersion>1.0.2.0</FileVersion>
+		<Copyright>Copyright © 2017-2022 Dywham Systems, All Rights Reserved</Copyright>
+		<PackageLicenseFile>eula.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\eula.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.3.0" />
+	  <PackageReference Include="NServiceBus.Persistence.Sql" Version="6.5.1" />
+	  <PackageReference Include="NServiceBus.RabbitMQ" Version="6.1.1" />
+	  <PackageReference Include="Quartz" Version="3.3.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Dywham.Fabric.Microservices.Endpoint\Dywham.Fabric.Microservices.Endpoint.csproj" />
+	  <ProjectReference Include="..\Dywham.Fabric.Microservices.Extended.Contracts\Dywham.Fabric.Microservices.Extended.Contracts.csproj" />
+	  <ProjectReference Include="..\Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories\Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories.csproj" />
+	</ItemGroup>
+
+</Project>

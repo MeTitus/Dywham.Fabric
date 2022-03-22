@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Authors>Dywham Systems</Authors>
+		<Company>Dywham Systems</Company>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Product>Dywham Fabric</Product>
+		<Version>1.0.1</Version>
+		<AssemblyVersion>1.0.1.0</AssemblyVersion>
+		<FileVersion>1.0.1.0</FileVersion>
+		<Copyright>Copyright © 2017-2022 Dywham Systems, All Rights Reserved</Copyright>
+		<PackageLicenseFile>eula.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\eula.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+
+    <ItemGroup>
+	    <FrameworkReference Include="Microsoft.WindowsDesktop.App.WPF" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Dywham.Fabric.Providers.Hardware.Printing\Dywham.Fabric.Providers.Hardware.Printing.csproj" />
+    </ItemGroup>
+	
+</Project>

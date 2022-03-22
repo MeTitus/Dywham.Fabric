@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extended", "Extended", "{3F947640-2127-4B74-A111-0AE71119FFA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Microservices.Contracts", "Dywham.Fabric.Microservices.Contracts\Dywham.Fabric.Microservices.Contracts.csproj", "{DA70C9FA-B9AC-4ED5-851D-90C4B2A9DF4A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Microservices.Endpoint", "Dywham.Fabric.Microservices.Endpoint\Dywham.Fabric.Microservices.Endpoint.csproj", "{EA55838C-664B-44F4-B6DA-7CF3F04504ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Microservices.Extended.Contracts", "Dywham.Fabric.Microservices.Extended.Contracts\Dywham.Fabric.Microservices.Extended.Contracts.csproj", "{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Microservices.Extended.Endpoint", "Dywham.Fabric.Microservices.Extended.Endpoint\Dywham.Fabric.Microservices.Extended.Endpoint.csproj", "{D33F1536-323E-4A9F-8800-607FD4075D3A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories", "Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories\Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories.csproj", "{CD99FFA9-0E05-40EA-96FE-78287AB06862}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA70C9FA-B9AC-4ED5-851D-90C4B2A9DF4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA70C9FA-B9AC-4ED5-851D-90C4B2A9DF4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA70C9FA-B9AC-4ED5-851D-90C4B2A9DF4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA70C9FA-B9AC-4ED5-851D-90C4B2A9DF4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA55838C-664B-44F4-B6DA-7CF3F04504ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA55838C-664B-44F4-B6DA-7CF3F04504ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA55838C-664B-44F4-B6DA-7CF3F04504ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA55838C-664B-44F4-B6DA-7CF3F04504ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D33F1536-323E-4A9F-8800-607FD4075D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D33F1536-323E-4A9F-8800-607FD4075D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D33F1536-323E-4A9F-8800-607FD4075D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D33F1536-323E-4A9F-8800-607FD4075D3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD99FFA9-0E05-40EA-96FE-78287AB06862}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD99FFA9-0E05-40EA-96FE-78287AB06862}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD99FFA9-0E05-40EA-96FE-78287AB06862}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD99FFA9-0E05-40EA-96FE-78287AB06862}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FAE17500-B84F-4B3B-92D8-FE409ACFEF2D} = {3F947640-2127-4B74-A111-0AE71119FFA5}
+		{D33F1536-323E-4A9F-8800-607FD4075D3A} = {3F947640-2127-4B74-A111-0AE71119FFA5}
+		{CD99FFA9-0E05-40EA-96FE-78287AB06862} = {3F947640-2127-4B74-A111-0AE71119FFA5}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9ACEA55A-05AC-49C6-A11B-0A476EDD8A99}
+	EndGlobalSection
+EndGlobal

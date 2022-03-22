@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Authors>Dywham Systems</Authors>
+		<Company>Dywham Systems</Company>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Product>Dywham Fabric</Product>
+		<Version>1.0.2</Version>
+		<AssemblyVersion>1.0.2.0</AssemblyVersion>
+		<FileVersion>1.0.2.0</FileVersion>
+		<Copyright>Copyright © 2017-2022 Dywham Systems, All Rights Reserved</Copyright>
+		<PackageLicenseFile>eula.txt</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<OutputType>Library</OutputType>
+		<IsPackable>true</IsPackable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\eula.txt">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="AutoMapper" Version="11.0.1" />
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+	  <PackageReference Include="Dywham.Fabric.Data.Repositories.EntityFramework.SqlServer" Version="1.0.2" />
+	  <PackageReference Include="Dywham.Fabric.Microservices.Extended.Contracts" Version="1.0.2" />
+	  <PackageReference Include="Dywham.Fabric.Providers.Web.Comms.SignalR.Server" Version="1.0.1" />
+	  <PackageReference Include="NServiceBus.Newtonsoft.Json" Version="2.3.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\Dywham.Fabric.Web.Api.Endpoint.Messaging\Dywham.Fabric.Web.Api.Endpoint.Messaging.csproj" />
+	  <ProjectReference Include="..\Dywham.Fabric.Web.Api.Extended.Contracts\Dywham.Fabric.Web.Api.Extended.Contracts.csproj" />
+	</ItemGroup>
+
+</Project>
