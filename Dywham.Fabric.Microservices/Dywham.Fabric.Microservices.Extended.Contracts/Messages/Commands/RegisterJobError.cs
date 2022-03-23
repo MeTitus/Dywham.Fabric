@@ -2,7 +2,7 @@
 
 namespace Dywham.Fabric.Microservices.Extended.Contracts.Messages.Commands
 {
-    public class RegisterJobError : ExtendedMessage
+    public class RegisterJobError : ExtendedCommand
     {
         public string Name { get; set; }
 
