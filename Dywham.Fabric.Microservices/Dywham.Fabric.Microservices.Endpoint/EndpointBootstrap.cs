@@ -212,15 +212,7 @@ namespace Dywham.Fabric.Microservices.Endpoint
         }
 
         protected virtual void ConfigureMessageConventions(EndpointConfiguration configuration)
-        {
-            configuration.Conventions().DefiningEventsAs(t => t.Namespace != null
-                && t.Namespace.ToLower().StartsWith("nservicebus") == false
-                && (t.Namespace.ToLower().Contains("events") || t.Name.ToLower().Contains("event")));
-
-            configuration.Conventions().DefiningCommandsAs(t => t.Namespace != null
-                && t.Namespace.ToLower().StartsWith("nservicebus") == false
-                && (t.Namespace.ToLower().Contains("commands") || t.Name.ToLower().Contains("command")));
-        }
+        {}
 
         protected virtual void ConfigureMonitoring(EndpointConfiguration configuration)
         {

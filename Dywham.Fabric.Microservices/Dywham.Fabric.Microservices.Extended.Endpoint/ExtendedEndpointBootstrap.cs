@@ -9,6 +9,7 @@ using Dywham.Fabric.Microservices.Endpoint;
 using Dywham.Fabric.Microservices.Endpoint.JobScheduling;
 using Dywham.Fabric.Microservices.Endpoint.Providers.Audit;
 using Dywham.Fabric.Microservices.Extended.Contracts.Messages.Commands;
+using Dywham.Fabric.Microservices.Extended.Contracts.Messages.Events;
 using Dywham.Fabric.Microservices.Extended.Endpoint.Jobs;
 using Dywham.Fabric.Microservices.Extended.Endpoint.Providers;
 using Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories;
@@ -47,6 +48,12 @@ namespace Dywham.Fabric.Microservices.Extended.Endpoint
             ConfigureTransport(configuration, assemblies);
 
             ConfigureFeatures(configuration);
+        }
+
+        protected override void ConfigureMessageConventions(EndpointConfiguration configuration)
+        {
+            configuration.Conventions().DefiningEventsAs(x => typeof(ExtendedEvent).IsAssignableFrom(x));
+            configuration.Conventions().DefiningCommandsAs(x => typeof(ExtendedCommand).IsAssignableFrom(x));
         }
 
         protected override void ConfigureSerialization(EndpointConfiguration configuration)
