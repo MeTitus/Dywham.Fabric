@@ -4,19 +4,19 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
 using Dywham.Fabric.Microservices.Contracts.Messages;
-using Dywham.Fabric.Microservices.Endpoint.Providers.Audit;
+using Dywham.Fabric.Microservices.Endpoint.Adapters.EventAudit;
 using Newtonsoft.Json;
 using NServiceBus.Pipeline;
 using NServiceBus.Transport;
 
 namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
 {
-    public sealed class OutgoingMessageExecutionTrackingBehavior : Behavior<IOutgoingLogicalMessageContext>
+    public sealed class OutgoingMessageTrackingBehavior : Behavior<IOutgoingLogicalMessageContext>
     {
         private readonly ILifetimeScope _lifetimeScope;
 
 
-        public OutgoingMessageExecutionTrackingBehavior(ILifetimeScope lifetimeScope)
+        public OutgoingMessageTrackingBehavior(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
         }
@@ -24,14 +24,14 @@ namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
 
         public override async Task Invoke(IOutgoingLogicalMessageContext context, Func<Task> next)
         {
-            if (context.Message.Instance is not DywhamMessage outgoingMessage)
+            if (context.Message.Instance is not EndpointMessage outgoingMessage)
             {
                 await next().ConfigureAwait(false);
 
                 return;
             }
 
-            if (_lifetimeScope.TryResolve<IRunOnMessageDispatchedBehavior>(out var runOnMessageDispatched))
+            if (_lifetimeScope.TryResolve<IMessageDispatchedBehavior>(out var runOnMessageDispatched))
             {
                 runOnMessageDispatched.OnDywhamMessageProcessed(context, outgoingMessage);
             }
@@ -85,7 +85,11 @@ namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
             if (incomingMessage != null || context.TryGetIncomingPhysicalMessage(out incomingMessage))
             {
                 eventToStore.OriginatedInTheContextOfPayload = Encoding.UTF8.GetString(incomingMessage.Body, 0, incomingMessage.Body.Length);
-                eventToStore.OriginatedInTheContextOfPayloadTypeName = incomingMessage.Headers["OriginatedInTheContextOfPayloadTypeName"];
+
+                if (!incomingMessage.Headers.ContainsKey("OriginatedInTheContextOfPayloadTypeName"))
+                {
+                    eventToStore.OriginatedInTheContextOfPayloadTypeName = incomingMessage.Headers["OriginatedInTheContextOfPayloadTypeName"];
+                }
             }
 
             await auditProvider.StoreAsync(eventToStore, CancellationToken.None);

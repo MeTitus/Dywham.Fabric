@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Dywham.Fabric.Microservices.Endpoint.Providers.Audit;
+using Dywham.Fabric.Microservices.Endpoint.Adapters.EventAudit;
 using Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories.Entities;
 using Dywham.Fabric.Microservices.Extended.Storage.Data.Repositories.Infrastructure;
 

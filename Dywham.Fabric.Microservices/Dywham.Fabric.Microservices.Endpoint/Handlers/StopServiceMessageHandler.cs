@@ -1,19 +1,17 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Dywham.Fabric.Microservices.Contracts.Messages;
 using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Endpoint.Handlers
 {
-    public class StopServiceMessageHandler : DywhamMessageHandler<StopServiceMessage>
+    public class StopServiceMessageHandler : MessageHandler<StopServiceMessage>
     {
         protected override async Task HandleAsync(CancellationToken token)
         {
             await Context.Publish(new ServiceStoppedMessage
             {
-                EndpointName = DywhamEndpointInstance.Name,
-                TrackingId = Guid.NewGuid()
+                EndpointName = DywhamEndpointInstance.Name
             });
 
             ThreadPool.QueueUserWorkItem(_ =>

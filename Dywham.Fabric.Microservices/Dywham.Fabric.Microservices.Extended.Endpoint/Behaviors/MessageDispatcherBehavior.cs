@@ -5,9 +5,9 @@ using NServiceBus.Pipeline;
 
 namespace Dywham.Fabric.Microservices.Extended.Endpoint.Behaviors
 {
-    public class MessageDispatcherBehavior : IRunOnMessageDispatchedBehavior, IRunOnMessageReceivedBehavior
+    public class MessageDispatcherBehavior : IMessageDispatchedBehavior, IMessageReceivedBehavior
     {
-        public void OnDywhamMessageProcessed(IOutgoingLogicalMessageContext context, DywhamMessage message)
+        public void OnDywhamMessageProcessed(IOutgoingLogicalMessageContext context, EndpointMessage message)
         {
             if (message is ExtendedMessage templatedMessage &&
                 context.TryGetIncomingPhysicalMessage(out var incomingMessage) &&
@@ -17,7 +17,7 @@ namespace Dywham.Fabric.Microservices.Extended.Endpoint.Behaviors
             }
         }
 
-        public void OnDywhamMessageProcessed(IIncomingLogicalMessageContext context, DywhamMessage message)
+        public void OnDywhamMessageProcessed(IIncomingLogicalMessageContext context, EndpointMessage message)
         {
             if (message is ExtendedMessage templatedMessage)
             {

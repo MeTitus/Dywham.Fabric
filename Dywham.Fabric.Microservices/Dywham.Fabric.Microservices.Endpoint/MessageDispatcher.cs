@@ -3,7 +3,7 @@ using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Endpoint
 {
-    public class DywhamEndpointInstance : IDywhamEndpointInstance
+    public class MessageDispatcher : IMessageDispatcher
     {
         private Action _stop;
 

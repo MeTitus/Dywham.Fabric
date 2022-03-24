@@ -10,14 +10,14 @@ using Quartz.Impl;
 
 namespace Dywham.Fabric.Microservices.Endpoint.JobScheduling
 {
-    public class RunOnEndpointStarting : IRunOnEndpointStartingBehavior
+    public class RunOnEndpointStarting : IEndpointStartupBehavior
     {
         private IScheduler _scheduler;
 
 
         public async Task OnEndpointStartingAsync(IEndpointInstance endpointInstance, ILifetimeScope scope, CancellationToken token)
         {
-            var jobs = scope.Resolve<IEnumerable<IDywhamJob>>().ToList();
+            var jobs = scope.Resolve<IEnumerable<IJobScheduler>>().ToList();
 
             if (!jobs.Any()) return;
 

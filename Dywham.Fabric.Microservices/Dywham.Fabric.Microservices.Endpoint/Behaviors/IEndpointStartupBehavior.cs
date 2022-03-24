@@ -5,7 +5,7 @@ using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
 {
-    public interface IRunOnEndpointStartingBehavior
+    public interface IEndpointStartupBehavior
     {
         Task OnEndpointStartingAsync(IEndpointInstance endpointInstance, ILifetimeScope scope, CancellationToken token);
     }

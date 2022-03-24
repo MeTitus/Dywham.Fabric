@@ -6,9 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using Dywham.Fabric.Microservices.Endpoint.Adapters.EventAudit;
 using Dywham.Fabric.Microservices.Endpoint.Behaviors;
 using Dywham.Fabric.Microservices.Endpoint.JobScheduling;
-using Dywham.Fabric.Microservices.Endpoint.Providers.Audit;
 using Dywham.Fabric.Utils;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -16,6 +16,7 @@ using NServiceBus;
 using NServiceBus.Configuration.AdvancedExtensibility;
 using NServiceBus.Extensions.Logging;
 using NServiceBus.Logging;
+using Log4NetProvider = Dywham.Fabric.Microservices.Endpoint.Adapters.Logging.Log4NetProvider;
 
 namespace Dywham.Fabric.Microservices.Endpoint
 {
@@ -26,7 +27,7 @@ namespace Dywham.Fabric.Microservices.Endpoint
     {
         private readonly object _lock = new();
         private string _settingsFileName = "endpointSettings.json";
-        private IDywhamEndpointInstance _dywhamEndpointInstance;
+        private IMessageDispatcher _dywhamEndpointInstance;
         private ILifetimeScope _scope;
 
 
@@ -73,8 +74,8 @@ namespace Dywham.Fabric.Microservices.Endpoint
 
                 if (EndpointSettings.EnableMessageExecutionTracking)
                 {
-                    configuration.Pipeline.Register(typeof(OutgoingMessageExecutionTrackingBehavior), "Outgoing Message Execution Tracking Behavior");
-                    configuration.Pipeline.Register(typeof(IncomingMessageExecutionTrackingBehavior), "Incoming Message Execution Tracking Behavior");
+                    configuration.Pipeline.Register(typeof(OutgoingMessageTrackingBehavior), "Outgoing Message Execution Tracking Behavior");
+                    configuration.Pipeline.Register(typeof(IncomingMessageTrackingBehavior), "Incoming Message Execution Tracking Behavior");
                 }
 
                 var containerSettings = configuration.UseContainer(new AutofacServiceProviderFactory());
@@ -95,13 +96,13 @@ namespace Dywham.Fabric.Microservices.Endpoint
 
                 Logger.Info("Endpoint initialization finished");
 
-                var dywhamEndpointInstance = (DywhamEndpointInstance) _dywhamEndpointInstance;
+                var dywhamEndpointInstance = (MessageDispatcher) _dywhamEndpointInstance;
 
                 dywhamEndpointInstance.SetStopAction(Stop);
                 dywhamEndpointInstance.SetName(EndpointSettings.EndpointName);
                 dywhamEndpointInstance.SetEndpoint(startableEndpoint.Start().GetAwaiter().GetResult());
 
-                var extraConfigurations = _scope.ResolveOptional<IList<IRunOnEndpointStartingBehavior>>();
+                var extraConfigurations = _scope.ResolveOptional<IList<IEndpointStartupBehavior>>();
 
                 if (extraConfigurations != null)
                 {
@@ -166,17 +167,17 @@ namespace Dywham.Fabric.Microservices.Endpoint
         {
             builder.RegisterAssemblyModules(assemblies);
             builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => typeof(IRunOnEndpointStartingBehavior).IsAssignableFrom(t) && !t.IsAbstract)
+                .Where(t => typeof(IEndpointStartupBehavior).IsAssignableFrom(t) && !t.IsAbstract)
                 .AsImplementedInterfaces()
                 .SingleInstance()
                 .PropertiesAutowired();
             builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => typeof(IRunOnMessageReceivedBehavior).IsAssignableFrom(t) && !t.IsAbstract)
+                .Where(t => typeof(IMessageReceivedBehavior).IsAssignableFrom(t) && !t.IsAbstract)
                 .AsImplementedInterfaces()
                 .SingleInstance()
                 .PropertiesAutowired();
             builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => typeof(IRunOnMessageDispatchedBehavior).IsAssignableFrom(t) && !t.IsAbstract)
+                .Where(t => typeof(IMessageDispatchedBehavior).IsAssignableFrom(t) && !t.IsAbstract)
                 .AsImplementedInterfaces()
                 .SingleInstance()
                 .PropertiesAutowired();
@@ -192,8 +193,8 @@ namespace Dywham.Fabric.Microservices.Endpoint
                 .AsImplementedInterfaces()
                 .PropertiesAutowired();
             builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => typeof(IDywhamJob).IsAssignableFrom(t) && !t.IsAbstract)
-                .As<IDywhamJob>()
+                .Where(t => typeof(IJobScheduler).IsAssignableFrom(t) && !t.IsAbstract)
+                .As<IJobScheduler>()
                 .InstancePerDependency()
                 .PropertiesAutowired()
                 .AsSelf();
@@ -203,10 +204,10 @@ namespace Dywham.Fabric.Microservices.Endpoint
                 .InstancePerDependency()
                 .PropertiesAutowired();
 
-            _dywhamEndpointInstance = new DywhamEndpointInstance();
+            _dywhamEndpointInstance = new MessageDispatcher();
 
             builder.RegisterInstance(_dywhamEndpointInstance)
-                .As<IDywhamEndpointInstance>()
+                .As<IMessageDispatcher>()
                 .SingleInstance()
                 .PropertiesAutowired();
         }
@@ -232,7 +233,7 @@ namespace Dywham.Fabric.Microservices.Endpoint
         {
             LogManager.UseFactory(new ExtensionsLoggerFactory(new LoggerFactory(new List<ILoggerProvider>
             {
-                new Providers.Logging.Log4NetProvider(EndpointSettings.LoggingConfiguration)
+                new Log4NetProvider(EndpointSettings.LoggingConfiguration)
             })));
 
             Logger = log4net.LogManager.GetLogger(GetType());

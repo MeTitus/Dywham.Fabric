@@ -14,7 +14,7 @@ using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Extended.Endpoint.Handlers
 {
-    public abstract class ToggleOperationalJobStateHandler<T, TZ> : DywhamMessageHandler<T> 
+    public abstract class ToggleOperationalJobStateHandler<T, TZ> : MessageHandler<T> 
         where T : ToggleOperationalJobState, new()
         where TZ : ExtendedDatabaseContext
     {

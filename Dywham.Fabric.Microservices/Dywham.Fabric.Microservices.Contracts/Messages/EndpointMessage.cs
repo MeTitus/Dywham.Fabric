@@ -2,7 +2,7 @@
 
 namespace Dywham.Fabric.Microservices.Contracts.Messages
 {
-    public class DywhamMessage
+    public class EndpointMessage
     {
         public Guid TrackingId { get; set; }
 

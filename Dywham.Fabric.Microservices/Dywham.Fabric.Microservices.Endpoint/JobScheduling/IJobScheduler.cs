@@ -4,7 +4,7 @@ using Quartz;
 
 namespace Dywham.Fabric.Microservices.Endpoint.JobScheduling
 {
-    public interface IDywhamJob
+    public interface IJobScheduler
     {
         ITrigger Trigger { get; }
 

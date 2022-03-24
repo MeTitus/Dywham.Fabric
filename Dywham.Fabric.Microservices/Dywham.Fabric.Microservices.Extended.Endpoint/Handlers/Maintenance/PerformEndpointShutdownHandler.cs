@@ -8,7 +8,7 @@ using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Extended.Endpoint.Handlers.Maintenance
 {
-    public class PerformEndpointShutdownHandler : DywhamMessageHandler<PerformEndpointShutdown>
+    public class PerformEndpointShutdownHandler : MessageHandler<PerformEndpointShutdown>
     {
         public IDateTimeProvider DateTimeProvider { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Dywham.Fabric.Microservices.Endpoint.Providers.Audit
+namespace Dywham.Fabric.Microservices.Endpoint.Adapters.EventAudit
 {
     public class EventAuditEntry
     {

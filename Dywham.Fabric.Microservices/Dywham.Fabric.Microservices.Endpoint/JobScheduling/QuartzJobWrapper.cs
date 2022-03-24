@@ -19,7 +19,7 @@ namespace Dywham.Fabric.Microservices.Endpoint.JobScheduling
                 var container = (IContainer) context.Scheduler.Context.Get("Container");
                 var endpointInstance = (IEndpointInstance) context.Scheduler.Context.Get("EndpointInstance");
                 // ReSharper disable once AssignNullToNotNullAttribute
-                var job = (IDywhamJob) container.Resolve(Type.GetType(context.JobDetail.Key.Name));
+                var job = (IJobScheduler) container.Resolve(Type.GetType(context.JobDetail.Key.Name));
 
                 await job.ExecuteAsync(context, endpointInstance);
             }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Logging;
 
-namespace Dywham.Fabric.Microservices.Endpoint.Providers.Logging
+namespace Dywham.Fabric.Microservices.Endpoint.Adapters.Logging
 {
     public class Log4NetProvider : ILoggerProvider
     {

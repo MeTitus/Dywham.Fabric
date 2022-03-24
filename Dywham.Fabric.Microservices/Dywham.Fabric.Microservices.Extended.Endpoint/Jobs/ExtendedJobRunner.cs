@@ -15,7 +15,7 @@ using Quartz;
 
 namespace Dywham.Fabric.Microservices.Extended.Endpoint.Jobs
 {
-    public abstract class ExtendedJobRunner<T> : IDywhamJob where T : ExtendedDatabaseContext
+    public abstract class ExtendedJobRunner<T> : IJobScheduler where T : ExtendedDatabaseContext
     {
         // ReSharper disable once StaticMemberInGenericType
         private static readonly ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod()?.DeclaringType);

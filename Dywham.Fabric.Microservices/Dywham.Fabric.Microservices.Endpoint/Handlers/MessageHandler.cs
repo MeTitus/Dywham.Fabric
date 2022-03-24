@@ -5,7 +5,7 @@ using NServiceBus;
 
 namespace Dywham.Fabric.Microservices.Endpoint.Handlers;
 
-public abstract class DywhamMessageHandler<T> : IHandleMessages<T> where T : DywhamMessage
+public abstract class MessageHandler<T> : IHandleMessages<T> where T : EndpointMessage
 {
     // ReSharper disable once PossibleNullReferenceException
     // ReSharper disable once UnusedMember.Global
@@ -15,7 +15,7 @@ public abstract class DywhamMessageHandler<T> : IHandleMessages<T> where T : Dyw
     protected T Message;
 
 
-    public IDywhamEndpointInstance DywhamEndpointInstance { get; set; }
+    public IMessageDispatcher DywhamEndpointInstance { get; set; }
 
 
     public Task Handle(T message, IMessageHandlerContext context)

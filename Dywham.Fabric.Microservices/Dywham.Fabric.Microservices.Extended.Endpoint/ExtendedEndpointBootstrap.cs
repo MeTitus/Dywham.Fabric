@@ -6,8 +6,8 @@ using System.Text;
 using Autofac;
 using Dywham.Fabric.Data.Repositories.EntityFramework;
 using Dywham.Fabric.Microservices.Endpoint;
+using Dywham.Fabric.Microservices.Endpoint.Adapters.EventAudit;
 using Dywham.Fabric.Microservices.Endpoint.JobScheduling;
-using Dywham.Fabric.Microservices.Endpoint.Providers.Audit;
 using Dywham.Fabric.Microservices.Extended.Contracts.Messages.Commands;
 using Dywham.Fabric.Microservices.Extended.Contracts.Messages.Events;
 using Dywham.Fabric.Microservices.Extended.Endpoint.Jobs;
@@ -140,7 +140,7 @@ namespace Dywham.Fabric.Microservices.Extended.Endpoint
             {
                 builder.RegisterType<UniquenessGuardCleanupJob<TY>>()
                     .AsSelf()
-                    .As<IDywhamJob>()
+                    .As<IJobScheduler>()
                     .As<ExtendedJobRunner<TY>>()
                     .InstancePerDependency()
                     .PropertiesAutowired();
@@ -150,7 +150,7 @@ namespace Dywham.Fabric.Microservices.Extended.Endpoint
             {
                 builder.RegisterType<ExtendedEndpointDynamicSettingsUpdaterJob<TY, TZ>>()
                     .AsSelf()
-                    .As<IDywhamJob>()
+                    .As<IJobScheduler>()
                     .As<ExtendedJobRunner<TY>>()
                     .InstancePerDependency()
                     .PropertiesAutowired();

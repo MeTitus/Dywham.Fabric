@@ -2,7 +2,7 @@
 
 namespace Dywham.Fabric.Microservices.Endpoint
 {
-    public interface IDywhamEndpointInstance
+    public interface IMessageDispatcher
     {
         IEndpointInstance EndpointInstance { get; }
 

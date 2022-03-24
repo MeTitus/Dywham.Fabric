@@ -6,12 +6,12 @@ using NServiceBus.Pipeline;
 
 namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
 {
-    public sealed class IncomingMessageExecutionTrackingBehavior : Behavior<IIncomingLogicalMessageContext>
+    public sealed class IncomingMessageTrackingBehavior : Behavior<IIncomingLogicalMessageContext>
     {
         private readonly ILifetimeScope _lifetimeScope;
 
 
-        public IncomingMessageExecutionTrackingBehavior(ILifetimeScope lifetimeScope)
+        public IncomingMessageTrackingBehavior(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
         }
@@ -19,7 +19,7 @@ namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
 
         public override async Task Invoke(IIncomingLogicalMessageContext context, Func<Task> next)
         {
-            if (context.Message.Instance is not DywhamMessage incomingMessage)
+            if (context.Message.Instance is not EndpointMessage incomingMessage)
             {
                 await next().ConfigureAwait(false);
 
@@ -41,7 +41,7 @@ namespace Dywham.Fabric.Microservices.Endpoint.Behaviors
                 context.Headers.Add("OriginatedInTheContextOfPayloadTypeName", incomingMessage.GetType().FullName);
             }
 
-            if (_lifetimeScope.TryResolve<IRunOnMessageReceivedBehavior>(out var runOnMessageDispatched))
+            if (_lifetimeScope.TryResolve<IMessageReceivedBehavior>(out var runOnMessageDispatched))
             {
                 runOnMessageDispatched.OnDywhamMessageProcessed(context, incomingMessage);
             }

@@ -2,7 +2,7 @@
 
 namespace Dywham.Fabric.Microservices.Extended.Contracts.Messages
 {
-    public class ExtendedMessage : DywhamMessage
+    public class ExtendedMessage : EndpointMessage
     {
         public string ClientNotificationTracking { get; set; }
     }

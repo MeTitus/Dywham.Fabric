@@ -6,7 +6,7 @@ using Dywham.Fabric.Microservices.Extended.Endpoint.Jobs;
 
 namespace Dywham.Fabric.Microservices.Extended.Endpoint.Handlers
 {
-    public class RegisterJobErrorHandler : DywhamMessageHandler<RegisterJobError>
+    public class RegisterJobErrorHandler : MessageHandler<RegisterJobError>
     {
 
         protected override Task HandleAsync(CancellationToken token)
