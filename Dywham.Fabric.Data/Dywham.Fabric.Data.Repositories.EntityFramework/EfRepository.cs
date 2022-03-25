@@ -11,14 +11,14 @@ using Z.EntityFramework.Plus;
 
 namespace Dywham.Fabric.Data.Repositories.EntityFramework
 {
-    public class EfRepository<T, TZ> : IEfRepository<T, TZ> where T : class, new() where TZ : EfDatabaseContext
+    public class EfRepository<T, TZ> : IEfRepository<T, TZ> where T : class, new() where TZ : EntityFrameworkDatabaseContext
     {
-        private readonly IEfDatabaseContextFactory<TZ> _databaseContextFactory;
+        private readonly IEntityFrameworkDatabaseContextFactory<TZ> _databaseContextFactory;
         private readonly object _lock = new();
         private TZ _dbContext;
 
 
-        public EfRepository(IEfDatabaseContextFactory<TZ> databaseContextFactory)
+        public EfRepository(IEntityFrameworkDatabaseContextFactory<TZ> databaseContextFactory)
         {
             _databaseContextFactory = databaseContextFactory;
         }
@@ -250,7 +250,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
             }).ToListAsync(token);
         }
 
-        public virtual Task<ExecutionResult<T>> WhereToExecutionResultAsync(Expression<Func<T, bool>> whereFunc, CancellationToken token)
+        public virtual Task<QueryResult<T>> WhereToExecutionResultAsync(Expression<Func<T, bool>> whereFunc, CancellationToken token)
         {
             return WhereToExecutionResultAsync(new QueryProperty<T>
             {
@@ -258,7 +258,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
             }, token);
         }
 
-        public virtual async Task<ExecutionResult<T>> WhereToExecutionResultAsync(QueryProperty<T> queryProperties, CancellationToken token)
+        public virtual async Task<QueryResult<T>> WhereToExecutionResultAsync(QueryProperty<T> queryProperties, CancellationToken token)
         {
             var set = DbContext.Set<T>();
             var queryable = set.AsQueryable();
@@ -277,19 +277,19 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
                 queryable = OrderBy(queryable, queryProperties.OrderedSet.ColumnName, !queryProperties.OrderedSet.Asc);
             }
 
-            if (queryProperties.StartIndex.HasValue && queryProperties.StartIndex.Value > 0)
+            if (queryProperties.StartIndex is > 0)
             {
                 queryable = queryable.Skip(queryProperties.StartIndex.Value);
             }
 
-            if (queryProperties.Limit.HasValue && queryProperties.Limit.Value > 0)
+            if (queryProperties.Limit is > 0)
             {
                 queryable = queryable.Take(queryProperties.Limit.Value);
             }
 
             var data = await queryable.Future().ToListAsync(token);
 
-            return new ExecutionResult<T>
+            return new QueryResult<T>
             {
                 Data = data,
                 TotalCount = count.Value,
@@ -297,7 +297,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
             };
         }
 
-        public virtual Task<ExecutionResult<TY>> WhereToExecutionResultAsync<TY>(Expression<Func<T, bool>> whereFunc, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class
+        public virtual Task<QueryResult<TY>> WhereToExecutionResultAsync<TY>(Expression<Func<T, bool>> whereFunc, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class
         {
             return WhereToExecutionResultAsync(new QueryProperty<T>
             {
@@ -305,7 +305,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
             }, funcConvert, token);
         }
 
-        public virtual async Task<ExecutionResult<TY>> WhereToExecutionResultAsync<TY>(QueryProperty<T> queryProperties, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class
+        public virtual async Task<QueryResult<TY>> WhereToExecutionResultAsync<TY>(QueryProperty<T> queryProperties, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class
         {
             var set = DbContext.Set<T>();
             var queryable = set.AsQueryable();
@@ -337,7 +337,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
 
             var data = await transformedQuery.Future().ToListAsync(token);
 
-            return new ExecutionResult<TY>
+            return new QueryResult<TY>
             {
                 Data = data,
                 TotalCount = count.Value,
@@ -345,14 +345,14 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
             };
         }
 
-        public async Task<ExecutionResult<T>> GetAsync(CollectionQueryFilter filter, CancellationToken token)
+        public async Task<QueryResult<T>> GetAsync(QueryFilter filter, CancellationToken token)
         {
             var queryProps = new QueryProperty<T>
             {
                 Limit = filter.Limit,
                 StartIndex = filter.StartIndex,
                 Where = x => x.AsNoTracking(),
-                OrderedSet = new OrderedSet
+                OrderedSet = new QueryResultOrdering
                 {
                     Asc = filter.Asc,
                     ColumnName = filter.ColumnName
@@ -361,7 +361,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
 
             var result = await WhereToExecutionResultAsync(queryProps, token);
 
-            return new ExecutionResult<T>
+            return new QueryResult<T>
             {
                 Data = result.Data,
                 SetSize = result.SetSize,
@@ -381,12 +381,12 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
 
             queryable = ApplyGlobalFilters(queryable);
 
-            if (queryProperties.StartIndex.HasValue && queryProperties.StartIndex.Value > 0)
+            if (queryProperties.StartIndex is > 0)
             {
                 queryable = queryable.Skip(queryProperties.StartIndex.Value);
             }
 
-            if (queryProperties.Limit.HasValue && queryProperties.Limit.Value > 0)
+            if (queryProperties.Limit is > 0)
             {
                 queryable = queryable.Take(queryProperties.Limit.Value);
             }
@@ -428,7 +428,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
 
         private static bool FindIsDbUpdateException(Exception ex)
         {
-            var result = ex is Microsoft.Data.SqlClient.SqlException sqlEx && (sqlEx.Number == 2601 || sqlEx.Number == 2627);
+            var result = ex is Microsoft.Data.SqlClient.SqlException {Number: 2601 or 2627};
 
             if (!result && ex.InnerException != null)
             {

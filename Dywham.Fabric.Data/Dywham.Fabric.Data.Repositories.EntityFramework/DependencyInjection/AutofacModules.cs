@@ -13,13 +13,6 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework.DependencyInjection
         {
             var assemblies = AssemblyUtils.GetAssemblies();
 
-            builder.RegisterAssemblyTypes(assemblies)
-                .Where(t => typeof(IRepository).IsAssignableFrom(t))
-                .AsSelf()
-                .AsImplementedInterfaces()
-                .InstancePerDependency()
-                .PropertiesAutowired();
-
             builder.RegisterGeneric(typeof(EfRepository<,>))
                 .As(typeof(IEfRepository<,>))
                 .InstancePerDependency()
@@ -61,7 +54,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework.DependencyInjection
             {
                 var baseTypes = new List<Type> {type};
 
-                if (type.BaseType != null && type.BaseType.IsGenericType)
+                if (type.BaseType is {IsGenericType: true})
                 {
                     baseTypes.AddRange(type.BaseType.GenericTypeArguments.Select(x => typeof(IEntityFrameworkDatabaseContextFactory<>).MakeGenericType(x.BaseType!)));
                 }

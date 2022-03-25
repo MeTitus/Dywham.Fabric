@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace Dywham.Fabric.Data.Repositories.EntityFramework.SqlServer
 {
-    public class SqlServerEfDatabaseContext : EfDatabaseContext
+    public class SqlServerDatabaseContext : EntityFrameworkDatabaseContext
     {
-        protected SqlServerEfDatabaseContext()
+        protected SqlServerDatabaseContext()
         { }
 
-        protected SqlServerEfDatabaseContext(string connectionString) : base(connectionString)
+        protected SqlServerDatabaseContext(string connectionString) : base(connectionString)
         { }
 
-        protected SqlServerEfDatabaseContext(DbConnection connection) : base(connection)
+        protected SqlServerDatabaseContext(DbConnection connection) : base(connection)
         { }
 
 

@@ -51,8 +51,8 @@ namespace Dywham.Fabric.Data.Repositories
 
         Task<List<T>> WhereAsync(Expression<Func<T, bool>> whereFunc, CancellationToken token = default);
 
-        Task<ExecutionResult<T>> WhereToExecutionResultAsync(Expression<Func<T, bool>> whereFunc, CancellationToken token);
+        Task<QueryResult<T>> WhereToExecutionResultAsync(Expression<Func<T, bool>> whereFunc, CancellationToken token);
 
-        Task<ExecutionResult<TY>> WhereToExecutionResultAsync<TY>(Expression<Func<T, bool>> whereFunc, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class;
+        Task<QueryResult<TY>> WhereToExecutionResultAsync<TY>(Expression<Func<T, bool>> whereFunc, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class;
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Dywham.Fabric.Data.Repositories
 {
-    public class OrderedSet
+    public class QueryResultOrdering
     {
         public bool Asc { get; set; } = true;
 

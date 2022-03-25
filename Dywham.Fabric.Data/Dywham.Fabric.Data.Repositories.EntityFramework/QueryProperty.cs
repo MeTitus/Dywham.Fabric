@@ -8,7 +8,7 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
     {
         public Func<DbSet<T>, IQueryable<T>> Where { get; set; }
 
-        public OrderedSet OrderedSet { get; set; }
+        public QueryResultOrdering OrderedSet { get; set; }
 
         public int? Limit { get; set; }
 

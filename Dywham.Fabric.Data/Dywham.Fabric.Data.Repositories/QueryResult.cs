@@ -2,7 +2,7 @@
 
 namespace Dywham.Fabric.Data.Repositories
 {
-    public class ExecutionResult<T>
+    public class QueryResult<T>
     {
         public IList<T> Data { get; set; }
 

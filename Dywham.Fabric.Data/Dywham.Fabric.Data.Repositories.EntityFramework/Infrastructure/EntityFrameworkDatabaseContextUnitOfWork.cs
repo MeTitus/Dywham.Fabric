@@ -11,27 +11,28 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Dywham.Fabric.Data.Repositories.EntityFramework.Infrastructure
 {
-    public abstract class EfDatabaseContextUnitOfWork<T, TY> : IEfDatabaseContextUnitOfWork where T : IEfDatabaseContextFactory<TY> where TY : EfDatabaseContext, IDisposable
+    public abstract class EntityFrameworkDatabaseContextUnitOfWork<T, TY> : IEfDatabaseContextUnitOfWork
+        where T : IEntityFrameworkDatabaseContextFactory<TY> where TY : EntityFrameworkDatabaseContext, IDisposable
     {
         // ReSharper disable once StaticMemberInGenericType
         protected TY DbContext;
-        private T _databaseContextFactory;
+        private T _dbFactory;
         // ReSharper disable once StaticMemberInGenericType
         protected static readonly Dictionary<Type, Dictionary<PropertyInfo, MethodInfo>> Properties = new();
         // ReSharper disable once StaticMemberInGenericType
-        private static readonly object Lock = new();
+        private readonly object _lock = new();
         private bool _transactionCommitted;
         private IDbContextTransaction _transaction;
-        private readonly object _object = new();
 
 
-        protected EfDatabaseContextUnitOfWork(T databaseContextFactory)
+
+        protected EntityFrameworkDatabaseContextUnitOfWork(T databaseContextFactory)
         {
-            _databaseContextFactory = databaseContextFactory;
+            _dbFactory = databaseContextFactory;
         }
 
 
-        protected virtual IsolationLevel IsolationLevel => IsolationLevel.Serializable;
+        protected virtual IsolationLevel IsolationLevel => IsolationLevel.ReadCommitted;
 
 
         public virtual async Task InitAsync(CancellationToken token)
@@ -41,13 +42,13 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework.Infrastructure
                 if (DbContext != null) return;
             }
 
-            DbContext = _databaseContextFactory.CreateInstance();
+            DbContext = _dbFactory.CreateInstance();
 
             try
             {
                 _transaction = await DbContext.Database.BeginTransactionAsync(IsolationLevel, token);
 
-                lock (Lock)
+                lock (_lock)
                 {
                     var type = GetType();
 
@@ -124,7 +125,9 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework.Infrastructure
 
         public void Dispose()
         {
-            lock (_object)
+            GC.SuppressFinalize(this);
+
+            lock (_lock)
             {
                 try
                 {

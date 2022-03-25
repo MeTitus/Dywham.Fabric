@@ -21,4 +21,9 @@
 		</None>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <PackageReference Include="Autofac" Version="6.3.0" />
+	  <PackageReference Include="Dywham.Fabric.Utils" Version="1.0.1" />
+	</ItemGroup>
+
 </Project>

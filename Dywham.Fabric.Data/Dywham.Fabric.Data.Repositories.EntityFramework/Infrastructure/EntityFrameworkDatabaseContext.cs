@@ -3,17 +3,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dywham.Fabric.Data.Repositories.EntityFramework.Infrastructure
 {
-    public abstract class EfDatabaseContext : DbContext
+    public abstract class EntityFrameworkDatabaseContext : DbContext
     {
-        protected EfDatabaseContext()
+        protected EntityFrameworkDatabaseContext()
         { }
 
-        protected EfDatabaseContext(string connectionString)
+        protected EntityFrameworkDatabaseContext(string connectionString)
         {
             ConnectionString = connectionString;
         }
 
-        protected EfDatabaseContext(DbConnection connection)
+        protected EntityFrameworkDatabaseContext(DbConnection connection)
         {
             DbConnection = connection;
         }

@@ -30,11 +30,11 @@ namespace Dywham.Fabric.Data.Repositories.EntityFramework
 
         Task<List<T>> WhereAsync(QueryProperty<T> queryProperties, CancellationToken token = default);
 
-        Task<ExecutionResult<T>> WhereToExecutionResultAsync(QueryProperty<T> queryProperties, CancellationToken token);
+        Task<QueryResult<T>> WhereToExecutionResultAsync(QueryProperty<T> queryProperties, CancellationToken token);
 
-        Task<ExecutionResult<T>> GetAsync(CollectionQueryFilter filter, CancellationToken token);
+        Task<QueryResult<T>> GetAsync(QueryFilter filter, CancellationToken token);
 
-        Task<ExecutionResult<TY>> WhereToExecutionResultAsync<TY>(QueryProperty<T> queryProperties, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class;
+        Task<QueryResult<TY>> WhereToExecutionResultAsync<TY>(QueryProperty<T> queryProperties, Expression<Func<T, TY>> funcConvert, CancellationToken token) where TY : class;
     }
 
     public interface IEfRepository<T, in TZ> : IEfRepository<T> where T : class, new() where TZ : DbContext
